@@ -122,6 +122,4 @@ module.exports = {
         "--depth": "1",
         "--noise": "1"
     }
-
-
 };

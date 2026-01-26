@@ -84,8 +84,8 @@ brightness = "normal"       # Common brightness for both themes: "darker", "norm
 # dark_brightness = "darker"  # Override brightness for dark theme only (optional)
 # light_brightness = "normal" # Override brightness for light theme only (optional)
 disable_toggle = false      # Hide theme toggle button
-default_theme_dark = "goyo-dark"
-default_theme_light = "goyo-light"
+default_theme_dark = "abyss"
+default_theme_light = "goyo-dark"
 
 # Font Configuration (new structured format)
 # You can use either the new [extra.font] format or the legacy flat format (custom_font_enabled, custom_font_name, custom_font_path)
@@ -101,7 +101,7 @@ path = ""        # Local path (e.g., "fonts/custom.woff") or remote URL (e.g., "
 [extra.sidebar]
 expand_depth = 1         # Sidebar expansion depth (max 5)
 disable_root_hide = false # Prevent hiding sidebar on root page
-enable_desktop_menu = false # integrate the navigation into the sidebar
+enable_desktop_menu = true # integrate the navigation into the sidebar
 
 # Share Buttons Configuration (new structured format)
 # You can use either the new [extra.share] format or the legacy flat format (enable_copy_url, enable_share_x)
