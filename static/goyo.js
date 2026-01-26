@@ -299,8 +299,10 @@ function initSearch() {
 }
 
 function initTheme() {
-  var themeController = document.querySelector(".theme-controller");
-  if (!themeController) return;
+    var themeControllers = document.querySelectorAll(".theme-controller");
+    if (!themeControllers.length) {
+        return;
+    }
 
   var CONFIG = {
     darkTheme: cfg.defaultThemeDark || "goyo-dark",
@@ -317,14 +319,40 @@ function initTheme() {
           : fallbackTheme;
 
   document.documentElement.setAttribute("data-theme", activeTheme);
-  themeController.checked = (activeTheme === CONFIG.darkTheme);
 
-  themeController.addEventListener("change", function (e) {
-    var newTheme = e.target.checked ? CONFIG.darkTheme : CONFIG.lightTheme;
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
-    updateLogoForTheme(newTheme, CONFIG);
-  });
+  // Set brightness based on current theme (per-theme brightness support)
+  var darkBrightness = window.darkBrightness || "normal";
+  var lightBrightness = window.lightBrightness || "normal";
+  var currentBrightness = (storedTheme === CONFIG.darkTheme) ? darkBrightness : lightBrightness;
+  document.documentElement.setAttribute("data-brightness", currentBrightness);
+
+  // Set checkbox state based on current theme
+  themeControllers.forEach(tc => {
+      tc.checked = activeTheme === CONFIG.darkTheme;
+  })
+
+  // Update logo visibility based on current theme
+  updateLogoForTheme(currentUserTheme);
+
+  themeControllers.forEach(tc => tc.addEventListener("change", function (e) {
+    var isChecked = e.target.checked;
+    var userTheme = isChecked ? CONFIG.darkTheme : CONFIG.lightTheme;
+
+    // Ensure that the theme controllers are in sync
+    themeControllers.forEach(tc => {
+        tc.checked = isChecked;
+    })
+
+    document.documentElement.setAttribute("data-theme", userTheme);
+    localStorage.setItem("theme", userTheme); // Store user-friendly name
+
+    // Update brightness based on the new theme (per-theme brightness support)
+    var newBrightness = (userTheme === "goyo-dark") ? darkBrightness : lightBrightness;
+    document.documentElement.setAttribute("data-brightness", newBrightness);
+
+    // Update logo when theme changes
+    updateLogoForTheme(userTheme);
+  }));
 }
 
 // Function to update logo visibility based on current theme
@@ -373,12 +401,12 @@ function initToc() {
 
   const activateLink = (id) => {
     if (activeId === id) return; // Already active, no need to update
-    
+
     activeId = id;
-    
+
     // Remove active class from all links
     tocLinks.forEach((link) => link.classList.remove("active"));
-    
+
     // Only close details if toc_expand is not enabled
     if (!tocExpand) {
       tocDetails.forEach((detail) => (detail.open = false));

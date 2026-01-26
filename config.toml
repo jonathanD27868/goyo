@@ -101,6 +101,7 @@ path = ""        # Local path (e.g., "fonts/custom.woff") or remote URL (e.g., "
 [extra.sidebar]
 expand_depth = 1         # Sidebar expansion depth (max 5)
 disable_root_hide = false # Prevent hiding sidebar on root page
+enable_desktop_menu = false # integrate the navigation into the sidebar
 
 # Share Buttons Configuration (new structured format)
 # You can use either the new [extra.share] format or the legacy flat format (enable_copy_url, enable_share_x)
