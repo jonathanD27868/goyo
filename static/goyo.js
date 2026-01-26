@@ -1,3 +1,4 @@
+
 function debounce(func, wait) {
   var timeout;
 
@@ -417,6 +418,9 @@ function initTheme() {
 
   var CONFIG = {
     darkTheme: "goyo-dark",
+    // lightTheme: "goyo-light",
+    // lightTheme: "cupcake",
+    // lightTheme: "halloween",
     lightTheme: "synthwave",
   };
 
@@ -436,51 +440,25 @@ function initTheme() {
     var newTheme = e.target.checked ? CONFIG.darkTheme : CONFIG.lightTheme;
     document.documentElement.setAttribute("data-theme", newTheme);
     localStorage.setItem("theme", newTheme);
+    updateLogoForTheme(newTheme, CONFIG);
   });
 }
 
 
-function updateLogoForTheme(currentTheme, config) {
-  // Use config to determine if the current theme is considered "dark"
-  // Default to treating the configured darkTheme as the dark one.
-  // If using a custom theme outside the config, we assume it's dark if it contains 'dark', 'night', 'coffee', etc.
-  var isDarkTheme = (currentTheme === config.darkTheme) || currentTheme.includes("dark") || currentTheme.includes("night");
-
-  var logoDark = updateLogoForTheme._logoDark;
-  var logoLight = updateLogoForTheme._logoLight;
-
-  if (logoDark === undefined || logoLight === undefined) {
-    logoDark = updateLogoForTheme._logoDark = document.querySelector('.logo-dark');
-    logoLight = updateLogoForTheme._logoLight = document.querySelector('.logo-light');
-  }
-
-  if (!logoDark && !logoLight) {
-    return;
-  }
-
-  if (logoDark) {
-    logoDark.classList.toggle('hidden', !isDarkTheme);
-  }
-  if (logoLight) {
-    logoLight.classList.toggle('hidden', isDarkTheme);
-  }
-}
-
-// // Function to update logo visibility based on current theme
-// function updateLogoForTheme(userTheme) {
-//   var isDarkTheme = userTheme === "goyo-dark";
+// function updateLogoForTheme(currentTheme, config) {
+//   // Use config to determine if the current theme is considered "dark"
+//   // Default to treating the configured darkTheme as the dark one.
+//   // If using a custom theme outside the config, we assume it's dark if it contains 'dark', 'night', 'coffee', etc.
+//   var isDarkTheme = (currentTheme === config.darkTheme) || currentTheme.includes("dark") || currentTheme.includes("night");
 //
-//   // Only query for logo elements once and cache the reference
 //   var logoDark = updateLogoForTheme._logoDark;
 //   var logoLight = updateLogoForTheme._logoLight;
 //
-//   // Cache elements on first call
 //   if (logoDark === undefined || logoLight === undefined) {
 //     logoDark = updateLogoForTheme._logoDark = document.querySelector('.logo-dark');
 //     logoLight = updateLogoForTheme._logoLight = document.querySelector('.logo-light');
 //   }
 //
-//   // If no theme-specific logos exist, nothing to do
 //   if (!logoDark && !logoLight) {
 //     return;
 //   }
@@ -492,6 +470,33 @@ function updateLogoForTheme(currentTheme, config) {
 //     logoLight.classList.toggle('hidden', isDarkTheme);
 //   }
 // }
+
+// Function to update logo visibility based on current theme
+function updateLogoForTheme(userTheme) {
+  var isDarkTheme = userTheme === "goyo-dark";
+
+  // Only query for logo elements once and cache the reference
+  var logoDark = updateLogoForTheme._logoDark;
+  var logoLight = updateLogoForTheme._logoLight;
+
+  // Cache elements on first call
+  if (logoDark === undefined || logoLight === undefined) {
+    logoDark = updateLogoForTheme._logoDark = document.querySelector('.logo-dark');
+    logoLight = updateLogoForTheme._logoLight = document.querySelector('.logo-light');
+  }
+
+  // If no theme-specific logos exist, nothing to do
+  if (!logoDark && !logoLight) {
+    return;
+  }
+
+  if (logoDark) {
+    logoDark.classList.toggle('hidden', !isDarkTheme);
+  }
+  if (logoLight) {
+    logoLight.classList.toggle('hidden', isDarkTheme);
+  }
+}
 
 function initToc() {
   const headings = document.querySelectorAll(
