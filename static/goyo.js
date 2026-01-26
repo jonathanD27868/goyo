@@ -295,75 +295,165 @@ function initSearch() {
   });
 }
 
+// function initTheme() {
+//   var themeController = document.querySelector(".theme-controller");
+//   if (!themeController) {
+//     return;
+//   }
+//
+//   // Theme mapping - maps user-friendly names to actual DaisyUI theme names
+//   var themeMapping = {
+//     "goyo-dark": "night",
+//     "goyo-light": "lofi",
+//   };
+//
+//   // Reverse mapping for checking current theme
+//   var reverseThemeMapping = {
+//     night: "goyo-dark",
+//     lofi: "goyo-light",
+//   };
+//
+//   var fallbackTheme =
+//     window && window.fallbackTheme ? window.fallbackTheme : "goyo-dark";
+//   var currentUserTheme = localStorage.getItem("theme") || fallbackTheme;
+//
+//   // Map user theme to actual DaisyUI theme
+//   var actualTheme = themeMapping[currentUserTheme] || currentUserTheme;
+//   document.documentElement.setAttribute("data-theme", actualTheme);
+//
+//   // Set brightness based on current theme (per-theme brightness support)
+//   var darkBrightness = window.darkBrightness || "normal";
+//   var lightBrightness = window.lightBrightness || "normal";
+//   var currentBrightness = (currentUserTheme === "goyo-dark") ? darkBrightness : lightBrightness;
+//   document.documentElement.setAttribute("data-brightness", currentBrightness);
+//
+//   // Set checkbox state based on current theme
+//   themeController.checked = currentUserTheme === "goyo-dark";
+//
+//   // Update logo visibility based on current theme
+//   updateLogoForTheme(currentUserTheme);
+//
+//   themeController.addEventListener("change", function (e) {
+//     var userTheme = e.target.checked ? "goyo-dark" : "goyo-light";
+//     var actualTheme = themeMapping[userTheme];
+//
+//     document.documentElement.setAttribute("data-theme", actualTheme);
+//     localStorage.setItem("theme", userTheme); // Store user-friendly name
+//
+//     // Update brightness based on the new theme (per-theme brightness support)
+//     var newBrightness = (userTheme === "goyo-dark") ? darkBrightness : lightBrightness;
+//     document.documentElement.setAttribute("data-brightness", newBrightness);
+//
+//     // Update logo when theme changes
+//     updateLogoForTheme(userTheme);
+//   });
+// }
+
+// /**
+//  * GENERIC THEME SWITCHER
+//  * This function handles toggling between a configured Light and Dark theme.
+//  */
+// function initTheme() {
+//   var themeController = document.querySelector(".theme-controller");
+//   if (!themeController) {
+//     return;
+//   }
+//
+//   // CONFIGURATION: Set your preferred themes here.
+//   // You can use "retro", "coffee", "night", "lofi", or the custom "goyo-*" themes.
+//   var CONFIG = {
+//     lightTheme: "goyo-light", // Theme applied when toggle is UNCHECKED
+//     darkTheme: "goyo-dark",   // Theme applied when toggle is CHECKED
+//   };
+//
+//   // Migration: If user has old localStorage values, map them to current config
+//   var legacyMapping = {
+//     "night": CONFIG.darkTheme,
+//     "lofi": CONFIG.lightTheme,
+//     "goyo-dark": CONFIG.darkTheme,
+//     "goyo-light": CONFIG.lightTheme
+//   };
+//
+//   var fallbackTheme = window && window.fallbackTheme ? window.fallbackTheme : CONFIG.lightTheme;
+//   var storedTheme = localStorage.getItem("theme");
+//
+//   // Determine active theme
+//   var activeTheme = storedTheme;
+//
+//   // Resolve legacy or invalid themes to defaults
+//   if (legacyMapping[storedTheme]) {
+//     activeTheme = legacyMapping[storedTheme];
+//   } else if (!storedTheme || (storedTheme !== CONFIG.lightTheme && storedTheme !== CONFIG.darkTheme)) {
+//     // If stored theme is not one of our configured pair, verify if it's a valid generic theme (optional)
+//     // For the toggle logic to work cleanly, we usually default to one of the two.
+//     // But if you want to support "retro" persistence when config is "goyo", we can leave it.
+//     // Here we force it to the config pair to ensure the toggle state matches the visual state.
+//     activeTheme = fallbackTheme;
+//   }
+//
+//   // Apply the theme
+//   document.documentElement.setAttribute("data-theme", activeTheme);
+//
+//   // Set the toggle checkbox state
+//   // Checked = Dark Mode, Unchecked = Light Mode
+//   var isDark = (activeTheme === CONFIG.darkTheme);
+//   themeController.checked = isDark;
+//
+//   updateLogoForTheme(activeTheme, CONFIG);
+//
+//   // Event Listener for the Toggle
+//   themeController.addEventListener("change", function (e) {
+//     var newTheme = e.target.checked ? CONFIG.darkTheme : CONFIG.lightTheme;
+//
+//     document.documentElement.setAttribute("data-theme", newTheme);
+//     localStorage.setItem("theme", newTheme);
+//     updateLogoForTheme(newTheme, CONFIG);
+//   });
+// }
+
 function initTheme() {
   var themeController = document.querySelector(".theme-controller");
-  if (!themeController) {
-    return;
-  }
+  if (!themeController) return;
 
-  // Theme mapping - maps user-friendly names to actual DaisyUI theme names
-  var themeMapping = {
-    "goyo-dark": "night",
-    "goyo-light": "lofi",
-  };
-
-  // Reverse mapping for checking current theme
-  var reverseThemeMapping = {
-    night: "goyo-dark",
-    lofi: "goyo-light",
+  var CONFIG = {
+    darkTheme: "goyo-dark",
+    lightTheme: "synthwave",
   };
 
   var fallbackTheme =
-    window && window.fallbackTheme ? window.fallbackTheme : "goyo-dark";
-  var currentUserTheme = localStorage.getItem("theme") || fallbackTheme;
+      (window && window.fallbackTheme) ? window.fallbackTheme : CONFIG.darkTheme;
 
-  // Map user theme to actual DaisyUI theme
-  var actualTheme = themeMapping[currentUserTheme] || currentUserTheme;
-  document.documentElement.setAttribute("data-theme", actualTheme);
-  
-  // Set brightness based on current theme (per-theme brightness support)
-  var darkBrightness = window.darkBrightness || "normal";
-  var lightBrightness = window.lightBrightness || "normal";
-  var currentBrightness = (currentUserTheme === "goyo-dark") ? darkBrightness : lightBrightness;
-  document.documentElement.setAttribute("data-brightness", currentBrightness);
+  var storedTheme = localStorage.getItem("theme");
+  var activeTheme =
+      (storedTheme === CONFIG.darkTheme || storedTheme === CONFIG.lightTheme)
+          ? storedTheme
+          : fallbackTheme;
 
-  // Set checkbox state based on current theme
-  themeController.checked = currentUserTheme === "goyo-dark";
-
-  // Update logo visibility based on current theme
-  updateLogoForTheme(currentUserTheme);
+  document.documentElement.setAttribute("data-theme", activeTheme);
+  themeController.checked = (activeTheme === CONFIG.darkTheme);
 
   themeController.addEventListener("change", function (e) {
-    var userTheme = e.target.checked ? "goyo-dark" : "goyo-light";
-    var actualTheme = themeMapping[userTheme];
-
-    document.documentElement.setAttribute("data-theme", actualTheme);
-    localStorage.setItem("theme", userTheme); // Store user-friendly name
-    
-    // Update brightness based on the new theme (per-theme brightness support)
-    var newBrightness = (userTheme === "goyo-dark") ? darkBrightness : lightBrightness;
-    document.documentElement.setAttribute("data-brightness", newBrightness);
-
-    // Update logo when theme changes
-    updateLogoForTheme(userTheme);
+    var newTheme = e.target.checked ? CONFIG.darkTheme : CONFIG.lightTheme;
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
   });
 }
 
-// Function to update logo visibility based on current theme
-function updateLogoForTheme(userTheme) {
-  var isDarkTheme = userTheme === "goyo-dark";
 
-  // Only query for logo elements once and cache the reference
+function updateLogoForTheme(currentTheme, config) {
+  // Use config to determine if the current theme is considered "dark"
+  // Default to treating the configured darkTheme as the dark one.
+  // If using a custom theme outside the config, we assume it's dark if it contains 'dark', 'night', 'coffee', etc.
+  var isDarkTheme = (currentTheme === config.darkTheme) || currentTheme.includes("dark") || currentTheme.includes("night");
+
   var logoDark = updateLogoForTheme._logoDark;
   var logoLight = updateLogoForTheme._logoLight;
-  
-  // Cache elements on first call
+
   if (logoDark === undefined || logoLight === undefined) {
     logoDark = updateLogoForTheme._logoDark = document.querySelector('.logo-dark');
     logoLight = updateLogoForTheme._logoLight = document.querySelector('.logo-light');
   }
 
-  // If no theme-specific logos exist, nothing to do
   if (!logoDark && !logoLight) {
     return;
   }
@@ -375,6 +465,33 @@ function updateLogoForTheme(userTheme) {
     logoLight.classList.toggle('hidden', isDarkTheme);
   }
 }
+
+// // Function to update logo visibility based on current theme
+// function updateLogoForTheme(userTheme) {
+//   var isDarkTheme = userTheme === "goyo-dark";
+//
+//   // Only query for logo elements once and cache the reference
+//   var logoDark = updateLogoForTheme._logoDark;
+//   var logoLight = updateLogoForTheme._logoLight;
+//
+//   // Cache elements on first call
+//   if (logoDark === undefined || logoLight === undefined) {
+//     logoDark = updateLogoForTheme._logoDark = document.querySelector('.logo-dark');
+//     logoLight = updateLogoForTheme._logoLight = document.querySelector('.logo-light');
+//   }
+//
+//   // If no theme-specific logos exist, nothing to do
+//   if (!logoDark && !logoLight) {
+//     return;
+//   }
+//
+//   if (logoDark) {
+//     logoDark.classList.toggle('hidden', !isDarkTheme);
+//   }
+//   if (logoLight) {
+//     logoLight.classList.toggle('hidden', isDarkTheme);
+//   }
+// }
 
 function initToc() {
   const headings = document.querySelectorAll(
