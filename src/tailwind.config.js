@@ -31,5 +31,11 @@ module.exports = {
             "color-scheme": "light",
             ...goyoThemes["goyo-light"],
         }),
+
+        themePlugin({
+            name: "my-theme",
+            "color-scheme": "light",
+            ...goyoThemes["my-theme"],
+        }),
     ],
 };

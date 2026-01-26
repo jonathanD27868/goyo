@@ -627,6 +627,9 @@ h6:hover .copy-heading-link-button {
     /* FIXED: Use color-mix for box-shadow opacity */
     box-shadow: 0 8px 24px color-mix(in srgb, theme('colors.primary'), transparent 60%);
 }
+.hero-cta-primary:hover > div {
+    opacity: 0.1;
+}
 
 .hero-cta-secondary {
     @apply bg-base-100/50 text-base-content border border-base-content/20 backdrop-blur-md;

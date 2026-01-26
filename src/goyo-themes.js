@@ -79,4 +79,49 @@ module.exports = {
         "--goyo-hero-mid": "#e2e8f0",
         "--goyo-hero-to": "#cbd5e1",
     },
+    "my-theme": {
+        "color-scheme": "light",
+
+        "--color-base-100": "oklch(97% 0.021 166.113)",
+        "--color-base-200": "oklch(95% 0.052 163.051)",
+        "--color-base-300": "oklch(90% 0.093 164.15)",
+        "--color-base-content": "oklch(37% 0.077 168.94)",
+
+        "--color-primary": "oklch(86% 0.005 56.366)",
+        "--color-primary-content": "oklch(98% 0.001 106.423)",
+
+        "--color-secondary": "oklch(62% 0.194 149.214)",
+        "--color-secondary-content": "oklch(98% 0.018 155.826)",
+
+        "--color-accent": "oklch(60% 0.118 184.704)",
+        "--color-accent-content": "oklch(98% 0.014 180.72)",
+
+        "--color-neutral": "oklch(59% 0.145 163.225)",
+        "--color-neutral-content": "oklch(97% 0.021 166.113)",
+
+        "--color-info": "oklch(78% 0.154 211.53)",
+        "--color-info-content": "oklch(30% 0.056 229.695)",
+
+        "--color-success": "oklch(76% 0.177 163.223)",
+        "--color-success-content": "oklch(26% 0.051 172.552)",
+
+        "--color-warning": "oklch(85% 0.199 91.936)",
+        "--color-warning-content": "oklch(28% 0.066 53.813)",
+
+        "--color-error": "oklch(70% 0.191 22.216)",
+        "--color-error-content": "oklch(25% 0.092 26.042)",
+
+        "--radius-selector": "0.25rem",
+        "--radius-field": "0rem",
+        "--radius-box": "0.5rem",
+
+        "--size-selector": "0.25rem",
+        "--size-field": "0.25rem",
+
+        "--border": "1px",
+        "--depth": "1",
+        "--noise": "1"
+    }
+
+
 };

@@ -421,7 +421,8 @@ function initTheme() {
     // lightTheme: "goyo-light",
     // lightTheme: "cupcake",
     // lightTheme: "halloween",
-    lightTheme: "synthwave",
+    lightTheme: "my-theme",
+    // lightTheme: "synthwave",
   };
 
   var fallbackTheme =
