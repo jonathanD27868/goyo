@@ -1,3 +1,4 @@
+// Get the config set in config.toml
 const cfg = window.GOYO_CONFIG || {};
 
 function debounce(func, wait) {
