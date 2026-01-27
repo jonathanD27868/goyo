@@ -80,7 +80,7 @@ creator = "@hahwul"  # Creator Twitter handle
 # The new format takes priority when both are present
 [extra.theme]
 colorset = "dark"           # Options: "dark", "light"
-brightness = "normal"       # Common brightness for both themes: "darker", "normal", "lighter"
+brightness = "normal"       # Common brightness for both themes: "darker", "normal", "lighter". Only for "goyo-dark" theme
 # dark_brightness = "darker"  # Override brightness for dark theme only (optional)
 # light_brightness = "normal" # Override brightness for light theme only (optional)
 disable_toggle = false      # Hide theme toggle button
