@@ -219,6 +219,17 @@ Applies only to goyo-dark / goyo-light
     background: linear-gradient(135deg,#3b82f6,#8b5cf6);
 }
 
+[data-theme="goyo-dark"] .btn-final-cta-section {
+    color: #fff;
+    background: linear-gradient(135deg,#64748b,#6b7280);
+    box-shadow: 0 4px 16px #64748b40;
+}
+[data-theme="goyo-light"] .btn-final-cta-section {
+    color: #fff;
+    background: linear-gradient(135deg,#374151,#1f2937);
+    box-shadow: 0 4px 16px #37415140;
+}
+
 [data-theme="goyo-dark"] .nav-button {
     color: var(--color-base-content);
     background: linear-gradient(135deg,#64748b14 0%,#94a3b814 100%);
