@@ -202,7 +202,7 @@ module.exports = {
 ```
 
 💡 Tip: you can paste the daisyUI output into ChatGPT and ask it to
-“**format this like the `my-theme` example used in Goyo, with all keys and values double-quoted**”.
+“**format this like the `my-theme` example used in themes/goyo/src/goyo-themes.js, with all keys and values double-quoted**”.
 
 
 ### Step 3 — Create the required project files
@@ -215,52 +215,62 @@ You must add the following files to your site.
 
 ```js
 // src/tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 
+// Import plugins from the theme submodule
 const daisyui = require("../themes/goyo/src/daisyui.js");
 const daisyTheme = require("../themes/goyo/src/daisyui-theme.js");
 
+// Import theme variables
 const goyoThemes = require("../themes/goyo/src/goyo-themes.js");
 const customThemes = require("./goyo-themes.custom.js");
 
+// Handle default exports vs CJS (same pattern as theme config)
 const daisyuiPlugin = daisyui.default || daisyui;
 const themePlugin = daisyTheme.default || daisyTheme;
 
+// Merge built-in + user themes
 const allThemes = { ...goyoThemes, ...customThemes };
 
 module.exports = {
-  content: [
-    "../templates/**/*.html",
-    "../content/**/*.md",
-    "../src/**/*.js",
+    content: [
+        // Site
+        "../templates/**/*.html",
+        "../content/**/*.md",
+        "../src/**/*.js",
 
-    "../themes/goyo/templates/**/*.html",
-    "../themes/goyo/content/**/*.md",
-    "../themes/goyo/static/**/*.js",
-  ],
+        // Theme templates/content/scripts (so Tailwind sees classes used by the theme)
+        "../themes/goyo/templates/**/*.html",
+        "../themes/goyo/content/**/*.md",
+        "../themes/goyo/static/**/*.js",
+    ],
 
-  plugins: [
-    daisyuiPlugin({ themes: "all" }),
+    plugins: [
+        // daisyUI core
+        daisyuiPlugin({ themes: "all" }),
 
-    themePlugin({
-      name: "goyo-dark",
-      "color-scheme": "dark",
-      ...allThemes["goyo-dark"],
-    }),
+        // Always include the built-in goyo themes
+        themePlugin({
+            name: "goyo-dark",
+            "color-scheme": "dark",
+            ...allThemes["goyo-dark"],
+        }),
 
-    themePlugin({
-      name: "goyo-light",
-      "color-scheme": "light",
-      ...allThemes["goyo-light"],
-    }),
+        themePlugin({
+            name: "goyo-light",
+            "color-scheme": "light",
+            ...allThemes["goyo-light"],
+        }),
 
-    ...Object.entries(customThemes).map(([name, vars]) =>
-      themePlugin({
-        name,
-        "color-scheme": vars["color-scheme"] || "light",
-        ...vars,
-      })
-    ),
-  ],
+        // Auto-register every user custom theme from src/goyo-themes.custom.js
+        ...Object.entries(customThemes).map(([name, vars]) =>
+            themePlugin({
+                name,
+                "color-scheme": vars["color-scheme"] || "light",
+                ...vars,
+            })
+        ),
+    ],
 };
 ```
 
@@ -280,15 +290,17 @@ That’s all — Goyo handles the rest.
 
 ```make
 theme-css:
-    tailwindcss -i src/main.css -o themes/goyo/static/css/main.css --minify
+    @test -x src/tailwindcss || (echo "❌ Tailwind not installed. Run: just setup-tailwind-linux"; exit 1)
+    src/tailwindcss -c src/tailwind.config.js -i src/main.css -o themes/goyo/static/css/main.css --minify
 
 setup-tailwind-linux:
-    curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
-    chmod +x tailwindcss
-    sudo mv tailwindcss /usr/local/bin/
+    curl -sLo src/tailwindcss https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
+    chmod +x src/tailwindcss
 
 setup-tailwind-macos:
-    brew install tailwindcss
+    curl -sLo src/tailwindcss https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-macos-arm64
+    chmod +x src/tailwindcss
+
 ```
 
 
