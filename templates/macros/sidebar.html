@@ -1,4 +1,5 @@
 {% import "macros/footer.html" as macros_footer %}
+{% import "macros/desktopMenu.html" as macros_desktopMenu %}
 {% macro sidebar(config, lang, current_path, section) %}
 {# Sidebar configuration with backward compatibility #}
 {# Priority: sidebar.* (new) > sidebar_expand_depth (legacy) #}
@@ -102,6 +103,13 @@
             </li>
         {% endfor %}
     </ul>
+
+    {% set display_desktop_menu = config.extra.sidebar.enable_desktop_menu | default(value=false) %}
+    {% if display_desktop_menu %}
+    <div class="flex w-full px-5 lg:hidden">
+        {{ macros_desktopMenu::menu(config=config, lang=lang) }}
+    </div>
+    {% endif %}
 
     {{ macros_footer::footer(config=config) }}
 </div>

@@ -172,6 +172,7 @@ Configure sidebar settings using the structured format:
 [extra.sidebar]
 expand_depth = 2         # 1-5, default expansion depth
 disable_root_hide = false # Show sidebar on landing page
+enable_desktop_menu = false # integrate the navigation into the sidebar
 ```
 
 {{ image_diff(src1="/images/side-home.jpg", src2="/images/wide-home.jpg", alt="goyo") }}

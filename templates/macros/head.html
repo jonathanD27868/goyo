@@ -58,7 +58,7 @@
     <script>
         (function() {
             // Theme mapping - maps user-friendly names to actual DaisyUI theme names
-            var themeMapping = { "goyo-dark": "night", "goyo-light": "lofi" };
+            // var themeMapping = { "goyo-dark": "night", "goyo-light": "lofi" };
 
             {# Theme configuration with backward compatibility #}
             {# Priority: theme.dark_brightness/light_brightness (new per-theme) > theme.brightness (common) > brightness (legacy) #}
@@ -77,22 +77,33 @@
             var defaultColorset = "{{ theme_colorset }}";
             var darkBrightness = "{{ dark_brightness }}";
             var lightBrightness = "{{ light_brightness }}";
-            var themeMap = { "dark": "goyo-dark", "light": "goyo-light" };
-            var fallbackTheme = themeMap[defaultColorset] || "goyo-dark";
+
+            // Read configured theme names from config.toml (with defaults)
+            var configuredDarkTheme = "{{ config.extra.theme.default_theme_dark | default(value='goyo-dark') }}";
+            var configuredLightTheme = "{{ config.extra.theme.default_theme_light | default(value='goyo-light') }}";
+
+            // Expose to goyo.js
+            window.themeConfig = {
+                darkTheme: configuredDarkTheme,
+                lightTheme: configuredLightTheme
+            };
 
             // Expose brightness config for global use (e.g., goyo.js)
             window.darkBrightness = darkBrightness;
             window.lightBrightness = lightBrightness;
 
+            var fallbackTheme = (defaultColorset === "dark") ? configuredDarkTheme : configuredLightTheme;
+            window.fallbackTheme = fallbackTheme;
+
             // Get theme from localStorage or use fallback
             var currentUserTheme = localStorage.getItem('theme') || fallbackTheme;
-            var actualTheme = themeMapping[currentUserTheme] || currentUserTheme;
+            var currentTheme = currentUserTheme || fallbackTheme;
 
             // Determine brightness based on current theme
-            var currentBrightness = (currentUserTheme === "goyo-dark") ? darkBrightness : lightBrightness;
+            var currentBrightness = (currentTheme === configuredDarkTheme) ? darkBrightness : lightBrightness;
 
             // Set theme and brightness attributes immediately
-            document.documentElement.setAttribute("data-theme", actualTheme);
+            document.documentElement.setAttribute("data-theme", currentTheme);
             document.documentElement.setAttribute("data-brightness", currentBrightness);
         })();
     </script>
@@ -268,6 +279,7 @@
 
       <!-- CSS -->
     <link rel="stylesheet" href="{{ get_url(path="css/main.css") | safe }}">
+    <link rel="stylesheet" href="{{ get_url(path="css/custom-main.css") | safe }}">
     <link rel="stylesheet" href="{{ get_url(path="css/font-awesome.min.css") | safe }}">
 
     <!-- Preload critical fonts -->
