@@ -932,6 +932,11 @@ footer.footer .social-icon:hover {
     transform: translateY(-2px);
 }
 
+/* Errata section */
+.errata .collapse-content {
+    padding-top: 0;
+}
+
 @media (max-width: 768px) {
     footer.footer {
         padding-top: 1.5rem;

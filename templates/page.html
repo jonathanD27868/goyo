@@ -16,6 +16,59 @@
     </div>
     {{ page.content | safe }}
 
+    <!--  Errata section  -->
+    {# --- START: AUTOMATIC ERRATA SECTION --- #}
+    {% if page.extra.errata %}
+    {% set badge_light = page.extra.errata_badge_light | default(value="badge-soft badge-accent") %}
+    {% set badge_dark  = page.extra.errata_badge_dark  | default(value="badge-soft badge-accent") %}
+
+    <div class="errata mt-12 pt-6">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+            <span class="text-warning">⚠</span> Errata & Updates
+        </h2>
+
+        <div class="flex flex-col gap-4">
+            {% for item in page.extra.errata %}
+            <div class="scroll-mt-20">
+                <div class="collapse collapse-arrow bg-base-200 border border-base-300 rounded-box">
+                    <input type="checkbox" />
+
+                    <div class="collapse-title text-base font-medium flex flex-col gap-2">
+                        <div class="flex flex-row items-baseline gap-2">
+                            <span
+                                    class="whitespace-nowrap shrink-0 badge"
+                                    data-errata-badge
+                                    data-badge-light="{{ badge_light }}"
+                                    data-badge-dark="{{ badge_dark }}"
+                            >
+                              Errata {{ loop.index }}
+                            </span>
+
+                            <span class="text-sm/10">
+                                <span class="font-bold">{{ item.date | date(format="%Y-%m-%d") }}:</span>
+                                {{ item.message }}
+                            </span>
+                        </div>
+
+                        {% if item.credit %}
+                        <div class="text-xs opacity-70 italic whitespace-nowrap px-1">
+                            {{ item.credit | markdown | striptags | safe }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    {% if item.content and item.content | length > 0 %}
+                    <div class="collapse-content prose max-w-none pt-2 bg-base-100/50">
+                        {{ item.content | markdown | safe }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
     {# Taxonomies (tags / categories) #}
     {% if page.taxonomies and (page.taxonomies.tags or page.taxonomies.categories) %}
     <div class="mt-8 pt-6 border-t border-gray-500/15 space-y-2 text-sm">
