@@ -95,7 +95,7 @@ This approach allows safe, explicit references to errata entries without relying
 
 You can customize the appearance of the errata badge using **DaisyUI badge classes**.
 
-Two optional settings are available under `[extra]`:
+Two optional settings are available under `[extra]` in `config.toml`:
 
 ```toml
 [extra]
