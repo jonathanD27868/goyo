@@ -46,9 +46,9 @@
             </p>
         </div>
     {% else %}
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {% for term in terms %}
-                <article class="border border-gray-500/15 rounded-lg">
+                <article class="overflow-hidden">
                     <a href="{{ term.permalink | safe }}" class="nav-button nav-button-next group block p-5">
                         <div class="nav-button-content">
                             <div class="nav-button-direction">
