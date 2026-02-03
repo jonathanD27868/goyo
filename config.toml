@@ -32,6 +32,10 @@ taxonomies = [
 errata_badge_dark  = "badge-soft badge-accent"
 errata_badge_light = "badge-soft badge-accent"
 
+# configuration for issue & typo style in contribution hub
+issue_and_typo_badge_light = "alert-soft alert-accent"
+issue_and_typo_badge_dark = "alert-accent"
+
 footer_html = "<div style='display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;'><a href='https://www.hahwul.com' target='_blank' rel='noopener noreferrer' style='display: inline-flex; align-items: center;'><img src='https://www.hahwul.com/images/logo-gray.png' alt='HAHWUL' style='height: 30px' /></a><span style='opacity: 0.6;'>•</span><span>Powered by <a href='https://www.getzola.org' class='font-medium text-base-content/70 hover:text-base-content transition-colors duration-200'>Zola</a> and <a href='https://github.com/hahwul/goyo' class='font-medium text-base-content/70 hover:text-base-content transition-colors duration-200'>Goyo</a></span></div>"
 default_thumbnail = "images/default_thumbnail.jpg"
 gtag = ""
@@ -56,6 +60,7 @@ nav_ko = [
 
 # Edit this page Configuration
 edit_url = "https://github.com/hahwul/goyo/edit/main"
+issue_url = "https://github.com/hahwul/goyo/issues" # Can't be used without edit_url setting
 
 # Language Configuration
 [extra.lang]

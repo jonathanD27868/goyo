@@ -228,14 +228,39 @@ rtl = ["ar", "he"]  # List of RTL languages
 
 ## Content & Sharing
 
-### Edit URL
+### Edit URL & Contribution Hub
+
+Configure contribution links. You can set up a simple "Edit this page" link or a complete contribution hub.
+
+#### Simple Mode (Edit Link only):
+If only `edit_url` is set, a simple link appears at the bottom of the page.
 
 ```toml
 [extra]
 edit_url = "https://github.com/hahwul/goyo/edit/main"
 ```
-
 Adds "Edit this page" link to each page.
+
+#### Advanced Mode (Contribution Hub):
+If both edit_url and issue_url are configured, a detailed section appears distinguishing between reporting issues (clarifications/errors) and fixing typos (fork & PR).
+
+```toml
+[extra]
+edit_url = "https://github.com/hahwul/goyo/edit/main"
+issue_url = "https://github.com/hahwul/goyo/issues"
+```
+
+#### Styling the Hub:
+
+You can customize the appearance of the alert badges in the contribution hub using these optional settings:
+
+```toml
+[extra]
+issue_and_typo_badge_light = "alert-soft alert-accent"
+issue_and_typo_badge_dark = "alert-accent"
+```
+
+The above values are the default ones if nothing is specified.
 
 ### Share Buttons
 
