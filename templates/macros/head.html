@@ -36,7 +36,22 @@
         {%- set is_rtl = true -%}
     {%- endif -%}
 {%- endif -%}
-<html lang="{{ lang | default(value='en') }}"{% if is_rtl %} dir="rtl"{% endif %} style="background-color: {{ theme_color }};">
+{# Determine default theme based on colorset and configured theme names #}
+{%- if config.extra.theme is defined -%}
+    {%- set colorset = config.extra.theme.colorset | default(value='dark') -%}
+    {%- set default_theme_dark = config.extra.theme.default_theme_dark | default(value='goyo-dark') -%}
+    {%- set default_theme_light = config.extra.theme.default_theme_light | default(value='goyo-light') -%}
+{%- else -%}
+    {%- set colorset = config.extra.default_colorset | default(value='dark') -%}
+    {%- set default_theme_dark = 'goyo-dark' -%}
+    {%- set default_theme_light = 'goyo-light' -%}
+{%- endif -%}
+{%- if colorset == "dark" -%}
+    {%- set default_theme = default_theme_dark -%}
+{%- else -%}
+    {%- set default_theme = default_theme_light -%}
+{%- endif -%}
+<html lang="{{ lang | default(value='en') }}"{% if is_rtl %} dir="rtl"{% endif %} data-theme="{{ default_theme }}" style="background-color: {{ theme_color }};">
 {% endmacro html_tag %}
 
 {% macro head(config, page, section, current_url) %}
@@ -95,9 +110,14 @@
             var fallbackTheme = (defaultColorset === "dark") ? configuredDarkTheme : configuredLightTheme;
             window.fallbackTheme = fallbackTheme;
 
-            // Get theme from localStorage or use fallback
-            var currentUserTheme = localStorage.getItem('theme') || fallbackTheme;
-            var currentTheme = currentUserTheme || fallbackTheme;
+            // Get theme from localStorage, but only use it if it matches configured themes
+            var storedTheme = localStorage.getItem('theme');
+            var currentTheme;
+            if (storedTheme === configuredDarkTheme || storedTheme === configuredLightTheme) {
+                currentTheme = storedTheme;
+            } else {
+                currentTheme = fallbackTheme;
+            }
 
             // Determine brightness based on current theme
             var currentBrightness = (currentTheme === configuredDarkTheme) ? darkBrightness : lightBrightness;

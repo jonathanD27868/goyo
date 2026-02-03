@@ -99,7 +99,7 @@ path = ""        # Local path (e.g., "fonts/custom.woff") or remote URL (e.g., "
 # You can use either the new [extra.sidebar] format or the legacy flat format (sidebar_expand_depth, disable_root_sidebar_hide)
 # The new format takes priority when both are present
 [extra.sidebar]
-expand_depth = 5         # Sidebar expansion depth (max 5)
+expand_depth = 1        # Sidebar expansion depth (max 5)
 disable_root_hide = false # Prevent hiding sidebar on root page
 enable_desktop_menu = true # integrate the navigation into the sidebar
 
