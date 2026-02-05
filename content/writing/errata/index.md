@@ -120,3 +120,13 @@ errata_badge_dark  = "badge-soft badge-accent"
     * Optional credit
     * Optional collapsible content
 * Badge style automatically adapts to light and dark themes
+
+## Integration with Contribution Hub
+
+The Errata system works best when paired with the **Contribution Hub**.
+
+* **If you use Errata**: You should enable the Contribution Hub (cf. `Configuration > Edit URL & Contribution Hub` doc) in your configuration. This gives your readers a clear path to report the errors you intend to document.
+* **Workflow**:
+  1.  A reader clicks "Report an Issue" in the Contribution Hub.
+  2.  You verify the error and update the content.
+  3.  You add an entry to the **Errata** section, crediting the user (see `credit` field above).
