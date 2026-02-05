@@ -250,6 +250,17 @@ edit_url = "https://github.com/hahwul/goyo/edit/main"
 issue_url = "https://github.com/hahwul/goyo/issues"
 ```
 
+#### Best Practice: Documenting Fixes
+
+If you enable the Contribution Hub, it is highly recommended to use the **Errata System** alongside it.
+
+When a user reports an issue or a typo:
+1.  **Fix** the content in your Markdown file.
+2.  **Document** the change in the same file using the `[[extra.errata]]` block.
+3.  **Credit** the reporter to encourage future contributions.
+
+This creates a transparent history of changes and rewards your community for their help.
+
 #### Styling the Hub:
 
 You can customize the appearance of the alert badges in the contribution hub using these optional settings:
