@@ -183,3 +183,6 @@ zola serve
 
 # and open http://localhost:1111 in your browser.
 ```
+
+## Personal changes from upstream that should be kept
+They are mentioned under `CUSTOM_PERSONAL` comments.
