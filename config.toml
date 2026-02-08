@@ -6,11 +6,13 @@ description = "Goyo is Theme"
 build_search_index = true
 default_language = "en"
 generate_feeds = true
+#feed_filenames = ["rss.xml"]
 generate_sitemap = true
 
+# CUSTOM_PERSONAL: tags for internal search only, no feed
 taxonomies = [
-    { name = "tags", paginate_by = 10, rss = true },
-    { name = "categories", paginate_by = 10 },
+    { name = "tags", feed = false },
+    { name = "categories", paginate_by = 10, feed = true },
 ]
 
 [markdown]
@@ -21,11 +23,35 @@ theme = "github-dark"
 
 [languages.ko]
 generate_feeds = true
+#feed_filenames = ["rss.xml"]
 build_search_index = true
+# CUSTOM_PERSONAL: tags for internal search only, no feed
 taxonomies = [
-    { name = "tags", paginate_by = 10, rss = true },
-    { name = "categories", paginate_by = 10 },
+    { name = "tags", feed = false },
+    { name = "categories", paginate_by = 10, feed = true },
 ]
+
+[translations]
+sidebar_feeds = "Feeds"
+# translation for feeds/ page
+global_feed = "Global Feed"
+category_feeds = "Category Feeds"
+all_posts = "All Posts"
+# translation for copy/copied
+copy = "Copy"
+copied = "Copied!"
+failed_to_copy = "Failed to copy!"
+
+[languages.ko.translations]
+sidebar_feeds = "Feeds"
+# translation for feeds/ page
+global_feed = "전체 피드"
+category_feeds = "카테고리별 피드"
+all_posts = "전체 게시글"
+# translation for copy/copied
+copy = "복사"
+copied = "복사 완료!"
+failed_to_copy = "복사 실패"
 
 [extra]
 # configuration for the badges' style in errata section

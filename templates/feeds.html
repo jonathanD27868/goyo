@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% block content %}
+{% set feed_filename = config.feed_filenames | first | default(value="atom.xml") %}
+<div class="prose">
+    <h1 class="mb-6 text-3xl font-bold">{{ page.title }}</h1>
+    <p class="mb-8 text-base-content/70">
+        {{ page.extra.description }}
+    </p>
+
+    <h3 class="text-xl font-bold mt-8 mb-4">{{ trans(key="global_feed", lang=lang) }}</h3>
+    <div class="card-taxonomies overflow-hidden w-full">
+            <span class="font-bold min-w-[100px]">{{ trans(key="all_posts", lang=lang) }}</span>
+            <button onclick="copyToClipboard('{{ get_url(path=feed_filename, lang=lang) }}', this)"
+            class="btn btn-sm btn-outline btn-primary">
+            {{ trans(key="copy", lang=lang) }}
+            </button>
+    </div>
+
+    <h3 class="text-xl font-bold mt-8 mb-4">{{ trans(key="category_feeds", lang=lang) }}</h3>
+    <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3">
+        {% set categories = get_taxonomy(kind="categories", lang=lang) %}
+        {% for term in categories.items %}
+        {% set feed_url = term.permalink ~ feed_filename %}
+            <div class="card-taxonomies overflow-hidden w-full">
+                <div class="nav-button-title">{{ term.name }}</div>
+                <button onclick="copyToClipboard('{{ feed_url }}', this)"
+                        class="btn btn-sm btn-outline btn-primary">
+                    {{ trans(key="copy", lang=lang) }}
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

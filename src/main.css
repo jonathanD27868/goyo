@@ -349,6 +349,12 @@
     /* Uses standard theme var for cleaner overrides if needed, or just defaults */
 }
 
+/* This targets daisyUI menu items to kill the double hover effect */
+.menu.sidebar a:hover {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
 /* Gallery */
 .gallery-box {
     margin-bottom: 40px;
@@ -570,6 +576,18 @@ h6:hover .copy-heading-link-button {
 
 .feature-description {
     @apply text-base-content/70;
+}
+
+/* taxonomies: tags and categories */
+.card-taxonomies {
+    @apply flex flex-row flex-wrap items-center justify-between w-full;
+    @apply gap-4 p-6 rounded-xl;
+    @apply transition-all duration-500 ease-out;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50;
+    @apply no-underline text-base-content;
+    @apply bg-gradient-to-br from-base-200/50 to-base-300/50;
+    @apply border border-base-content/10;
+    min-height: 6rem;
 }
 
 /* Testimonial Cards */

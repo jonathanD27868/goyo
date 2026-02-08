@@ -305,6 +305,19 @@
     <!-- Preload critical fonts -->
     <link rel="preload" href="{{ get_url(path="fonts/Pretendard-Regular.woff") | safe }}" as="font" type="font/woff" crossorigin>
 
+    <!--  Global Config to pass to different JS scripts  -->
+    <script>
+        window.GOYO_CONFIG = {
+            defaultThemeDark: "{{ config.extra.theme.default_theme_dark | default(value="goyo-dark") }}",
+            defaultThemeLight: "{{ config.extra.theme.default_theme_light | default(value="goyo-light") }}",
+            i18n: {
+                copy: {{ trans(key="copy", lang=lang) | json_encode | safe }},
+                copied: {{ trans(key="copied", lang=lang) | json_encode | safe }},
+                failed_to_copy: {{ trans(key="failed_to_copy", lang=lang) | json_encode | safe }},
+            },
+        };
+    </script>
+
     <!-- Defer non-critical scripts -->
     <script defer src="{{ get_url(path="js/copy_code.js") | safe }}"></script>
     <script defer src="{{ get_url(path="js/copy_heading_link.js") | safe }}"></script>

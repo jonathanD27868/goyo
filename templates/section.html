@@ -6,11 +6,44 @@
 
 {% block content %}
     <div class="mb-12 pb-4 border-b border-gray-500/15">
-        <h1 class="flex items-center gap-3">
+        <h1 class="flex items-center gap-3 py-1">
             {{ section.title }}
             {% if section.extra.badge %}
                 <span class="text-sm font-normal px-2 py-0.5 border border-gray-500/30 rounded">{{ section.extra.badge }}</span>
             {% endif %}
+
+            {# CUSTOM_PERSONAL: feed icon #}
+            {# 1. Get all categories used in the site #}
+            {% set categories = get_taxonomy(kind="categories", lang=lang) %}
+            {% set feed_filename = config.feed_filenames | first | default(value="atom.xml") %}
+            {% set category_has_feed = false %}
+            {% set feed_url = "" %}
+
+            {# 2. Check if the current section title exists in the categories list #}
+            {% if categories %}
+                {% for term in categories.items %}
+                    {# Check Match: Title OR Custom Slug in [extra] #}
+                    {% if term.name | lower == section.title | lower or (section.extra.slug is defined and term.slug == section.extra.slug) %}
+                        {% set_global category_has_feed = true %}
+                        {% set_global feed_url = term.permalink ~ feed_filename %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {# --- END: FEED GUARD LOGIC --- #}
+
+            {# Only show the feed icon if Config is enabled AND the Category exists #}
+            {% if config.generate_feeds and category_has_feed %}
+            <button
+                    onclick="copyToClipboardRSSIcon('{{ feed_url }}', this)"
+                    class="inline-flex items-center justify-center p-1 rounded-md hover:bg-primary/10 text-primary transition-colors cursor-pointer"
+                    title="Copy Feed Link"
+            >
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                </svg>
+            </button>
+            {% endif %}
+
         </h1>
         <p class="text-gray-500">{{ section.description }}</p>
     </div>

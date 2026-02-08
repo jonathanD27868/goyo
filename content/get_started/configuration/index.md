@@ -301,3 +301,40 @@ repo_id = "R_kgDOPHnqwg"
 category = "General"
 category_id = "DIC_kwDOPHnqws4CspmC"
 ```
+
+## UI translations
+
+Goyo uses Zola’s translation system for UI labels (sidebar entries, buttons, copy feedback, etc.).
+
+Define strings in `config.toml`:
+
+* Default language: **`[translations]`**
+* Per language: **`[languages.<code>.translations]`**
+
+```toml
+[translations]
+# Sidebar navigation
+sidebar_feeds = "Feeds"
+# /feeds/ page titles and sections
+global_feed = "Global Feed"
+category_feeds = "Category Feeds"
+all_posts = "All Posts"
+# Copy-to-clipboard buttons and feedback messages
+copy = "Copy"
+copied = "Copied!"
+failed_to_copy = "Failed to copy!"
+
+[languages.ko.translations]
+# Sidebar navigation
+sidebar_feeds = "Feeds"
+# /feeds/ page titles and sections
+global_feed = "전체 피드"
+category_feeds = "카테고리별 피드"
+all_posts = "전체 게시글"
+# Copy-to-clipboard buttons and feedback messages
+copy = "복사"
+copied = "복사 완료!"
+failed_to_copy = "복사 실패"
+```
+
+**Note:** Zola expects translation keys to exist for each enabled language; missing keys can cause the build to fail.

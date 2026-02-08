@@ -165,12 +165,6 @@
     </div>
 
     {% block js_body %}
-        <script>
-            window.GOYO_CONFIG = {
-                defaultThemeDark: "{{ config.extra.theme.default_theme_dark | default(value="goyo-dark") }}",
-                defaultThemeLight: "{{ config.extra.theme.default_theme_light | default(value="goyo-light") }}",
-            };
-        </script>
         <script type="text/javascript" src="{{ get_url(path='goyo.js') | safe }}"></script>
         {% if config.build_search_index %}
         <!-- Lazy load search functionality -->

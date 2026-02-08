@@ -28,10 +28,18 @@
         </div>
     </div>
     {% endif %}
-    <ul class="menu w-full flex-grow">
+    <!--  CUSTOM_PERSONAL: sidebar is to control the double hover effect in src/main.css  -->
+    <ul class="menu sidebar w-full flex-grow">
         {% set index = get_section(path="_index.md") %}
         {# Level 1 - Root #}
         {% for page in index.pages %}
+
+            {# CUSTOM_PERSONAL: remove the pages that have in_sidebar = true in front-matter #}
+            {# CHECK: If in_sidebar is false, skip this page #}
+            {% if page.extra.in_sidebar is defined and page.extra.in_sidebar == false %}
+                {% continue %}
+            {% endif %}
+
             <li {% if normalized_current_path == page.path %}class="rounded bg-gray-500/15"{% endif %}><a class="hover:no-underline" href="{{ get_url(path=page.path, lang=lang) | safe }}">{{ page.title }}</a></li>
         {% endfor %}
         {% for s1_path in index.subsections %}
@@ -102,6 +110,19 @@
                 {% else %}<a {% if normalized_current_path == s1.path %}class="rounded bg-gray-500/15"{% endif %} href="{{ get_url(path=s1.path, lang=lang) | safe }}">{{ s1.title }}</a>{% endif %}
             </li>
         {% endfor %}
+
+        {# --- CUSTOM_PERSONAL: Custom Links Feeds --- #}
+        {% if config.generate_feeds %}
+        <li>
+            <a class="hover:no-underline {% if normalized_current_path == '/feeds/' %}rounded bg-gray-500/15{% endif %}"
+               href="{{ get_url(path='@/feeds.md', lang=lang) | safe }}">
+                {# Optional Icon: RSS Symbol #}
+                <svg class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
+                {{ trans(key="sidebar_feeds", lang=lang) }}
+            </a>
+        </li>
+        {% endif %}
+
     </ul>
 
     {% set display_desktop_menu = config.extra.sidebar.enable_desktop_menu | default(value=false) %}

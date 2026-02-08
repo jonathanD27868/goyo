@@ -73,6 +73,7 @@
     {% if page.taxonomies and (page.taxonomies.tags or page.taxonomies.categories) %}
     <div class="mt-8 pt-6 border-t border-gray-500/15 space-y-2 text-sm">
         {% if page.taxonomies.categories %}
+        {% set feed_filename = config.feed_filenames | first | default(value="atom.xml") %}
         <div class="flex flex-wrap items-center gap-2">
             <div class="tooltip" data-tip="Categories">
                 <svg class="w-4 h-4 text-base-content/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,10 +82,22 @@
                 </svg>
             </div>
             {% for cat in page.taxonomies.categories %}
-            <a href="{{ get_taxonomy_url(kind="categories", name=cat) }}"
-               class="inline-flex items-center badge badge-dash border-gray-500/30 text-xs hover:border-gray-500/70 transition-colors">
-                {{ cat }}
-            </a>
+            {% set cat_url = get_taxonomy_url(kind="categories", name=cat, lang=lang, required=false) %}
+            <div class="flex">
+                <a href="{{ cat_url }}"
+                   class="inline-flex items-center badge badge-dash border-gray-500/30 text-xs hover:border-gray-500/70 transition-colors">
+                    {{ cat }}
+                </a>
+                <button
+                        onclick="copyToClipboardRSSIcon('{{ cat_url ~ feed_filename }}', this)"
+                        class="relative w-6 h-6 inline-flex items-center justify-center rounded-md hover:bg-primary/10 text-primary transition-colors cursor-pointer"
+                        title="Copy Feed Link"
+                >
+                    <svg class="absolute w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                    </svg>
+                </button>
+            </div>
             {% endfor %}
         </div>
         {% endif %}
@@ -97,7 +110,7 @@
                 </svg>
             </div>
             {% for tag in page.taxonomies.tags %}
-            <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}"
+            <a href="{{ get_taxonomy_url(kind="tags", name=tag, lang=lang, required=false) }}"
                class="inline-flex items-center badge badge-dash text-xs border-gray-500/30 hover:border-gray-500/70 transition-colors">
                 {{ tag }}
             </a>
