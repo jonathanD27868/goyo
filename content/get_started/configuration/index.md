@@ -313,28 +313,62 @@ Define strings in `config.toml`:
 
 ```toml
 [translations]
-# Sidebar navigation
+# errata system
+errata_section = "Errata & Updates"
+# translation for feeds/ page
 sidebar_feeds = "Feeds"
-# /feeds/ page titles and sections
 global_feed = "Global Feed"
 category_feeds = "Category Feeds"
 all_posts = "All Posts"
-# Copy-to-clipboard buttons and feedback messages
+# translation for copy/copied
 copy = "Copy"
 copied = "Copied!"
 failed_to_copy = "Failed to copy!"
+# Nav buttons (bottom of pages & sections)
+next = "Next"
+back_to = "Back to"
+previous = "Previous"
+# contribution (bottom of pages & sections)
+edit_page = "Edit this page"
+found_error_alert = "Found an error or it needs a clarification?"
+open_issue = "Open an issue on GitHub."
+attribution = "Substantiated corrections will be incorporated with attribution."
+found_typo_alert = "Found a typo?"
+fork_and_pr = "Fork, modify and open a PR."
+# Share (bottom of pages & sections)
+copy_url_msg = "Copy URL"
+share_on_x = "Share on X"
+# Title of the Table of Content (ToC)
+toc_title = "ON THIS PAGE"
 
 [languages.ko.translations]
-# Sidebar navigation
+# errata system
+errata_section = "정오표 및 업데이트"
+# translation for feeds/ page
 sidebar_feeds = "Feeds"
-# /feeds/ page titles and sections
 global_feed = "전체 피드"
 category_feeds = "카테고리별 피드"
 all_posts = "전체 게시글"
-# Copy-to-clipboard buttons and feedback messages
+# translation for copy/copied
 copy = "복사"
 copied = "복사 완료!"
 failed_to_copy = "복사 실패"
+# Nav buttons (botton of pages & sections)
+next = "다음"
+back_to = "돌아가기"
+previous = "이전 단계"
+# contribution (bottom of pages & sections)
+edit_page = "이 페이지 수정하기"
+found_error_alert = "오류를 발견하셨나요? 혹은 설명이 더 필요하신가요?"
+open_issue = "GitHub에서 이슈를 제기해 주세요."
+attribution = "반영된 수정 사항에 대해서는 기여자로 성함(ID)을 남겨드립니다."
+found_typo_alert = "오타를 발견하셨나요?"
+fork_and_pr = "Fork 후 수정하여 PR을 보내주세요."
+# Share (bottom of pages & sections)
+copy_url_msg = "URL 복사"
+share_on_x = "X에 공유하기"
+# Title of the Table of Content (ToC)
+toc_title = "목차"
 ```
 
 **Note:** Zola expects translation keys to exist for each enabled language; missing keys can cause the build to fail.

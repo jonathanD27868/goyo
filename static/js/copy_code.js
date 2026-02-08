@@ -42,7 +42,7 @@ function copyToClipboard(text, button) {
             button.classList.remove("btn-success");
         }, 2000);
 
-    }). catch(function() {
+    }).catch(function () {
         // ERROR STATE (Generic)
         let originalText = button.innerText;
         button.innerText = translator("failed_to_copy");
@@ -94,6 +94,33 @@ function copyToClipboardRSSIcon(text, button) {
             button.classList.remove("btn-error");
             errorMsg.remove();
             button.disabled = false;
+        }, 2000);
+    });
+}
+
+function copyURL(text, button) {
+    if (!navigator.clipboard) {
+        // Fallback for very old browsers or non-HTTPS
+        alert("Clipboard not supported in this browser.");
+        return;
+    }
+
+    navigator.clipboard.writeText(text).then(function () {
+        // Visual feedback
+        let originalText = button.innerText;
+        button.innerText = translator("copied");
+
+        setTimeout(() => {
+            button.innerText = originalText;
+        }, 2000);
+
+    }).catch(function () {
+        // ERROR STATE (Generic)
+        let originalText = button.innerText;
+        button.innerText = translator("failed_to_copy");
+
+        setTimeout(() => {
+            button.innerText = originalText;
         }, 2000);
     });
 }
