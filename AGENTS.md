@@ -28,20 +28,17 @@ just --version  # Should show: just 1.42.4
 Bootstrap the project dependencies:
 
 ```bash
-# CRITICAL: Fix TailwindCSS architecture mismatch for x86_64 systems
-rm -f src/tailwindcss  # Remove if exists
-curl -sLo src/tailwindcss https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
-chmod +x src/tailwindcss
+# Setup dependencies for Linux (x86_64)
+just setup-linux
 
-# Download DaisyUI dependencies
-curl -sLo src/daisyui.js https://github.com/saadeghi/daisyui/releases/latest/download/daisyui.js
-curl -sLo src/daisyui-theme.js https://github.com/saadeghi/daisyui/releases/latest/download/daisyui-theme.js
+# OR Setup dependencies for macOS (Apple Silicon)
+# just setup-macos
 
 # Verify TailwindCSS works
 src/tailwindcss --help
 ```
 
-**IMPORTANT:** The `just setup-linux` command in the justfile downloads the ARM64 version of TailwindCSS which will NOT work on x86_64 systems. Always use the manual setup above.
+**NOTE:** `just setup-macos` downloads the ARM64 version of TailwindCSS. For Intel Macs or other architectures, you may need to download the correct binary manually to `src/tailwindcss`.
 
 ### Build Process
 Build the complete site:
@@ -106,9 +103,9 @@ After making any changes to the theme or content:
 /home/runner/work/goyo/goyo/
 ├── .github/
 │   ├── workflows/           # GitHub Actions deployment (zola.yml, labeler.yml)
-│   ├── copilot-instructions.md  # Development instructions for AI assistants
 │   ├── labeler.yml          # GitHub labeler configuration
 │   └── FUNDING.yml          # Sponsorship configuration
+├── AGENTS.md                # Development instructions for AI assistants
 ├── content/                 # Markdown content files (multilingual: .md for EN, .ko.md for KR)
 │   ├── _index.md            # Landing page configuration
 │   ├── introduction/        # Introduction section
@@ -141,7 +138,10 @@ After making any changes to the theme or content:
 │   ├── syntax-highlight.css # Code syntax highlighting styles
 │   ├── tailwindcss          # TailwindCSS binary (downloaded, gitignored)
 │   ├── daisyui.js           # DaisyUI plugin (downloaded)
-│   └── daisyui-theme.js     # DaisyUI theme customization (downloaded)
+│   ├── daisyui-theme.js     # DaisyUI theme customization (downloaded)
+│   ├── goyo-themes.js       # Custom theme definitions
+│   ├── goyo.css             # Goyo theme CSS overrides
+│   └── tailwind.config.js   # TailwindCSS configuration
 ├── public/                  # Generated site (created by build, gitignored)
 ├── justfile                 # Build automation tasks (build, dev, setup-macos, setup-linux, update-dependencies)
 ├── config.toml             # Zola site configuration (base_url, languages, navigation, theme settings)
@@ -156,9 +156,9 @@ After making any changes to the theme or content:
 # List all available tasks
 just
 
-# Setup dependencies (use manual method above instead for x86_64)
+# Setup dependencies
 just setup-macos   # For macOS ARM64 systems
-just setup-linux   # ⚠️ Downloads ARM64 version - don't use on x86_64
+just setup-linux   # For Linux x86_64 systems
 
 # Update DaisyUI dependencies only
 just update-dependencies
@@ -216,20 +216,18 @@ Key configuration sections:
 
 ### GitHub Actions
 - Automatic deployment configured in `.github/workflows/zola.yml`
-- Uses `shalzz/zola-deploy-action@v0.21.0` for deployment
+- Uses `shalzz/zola-deploy-action@v0.22.0` for deployment
 - Adds CNAME file for custom domain: goyo.hahwul.com
 - Builds and deploys to GitHub Pages on push to main branch
 - Target site: https://goyo.hahwul.com
 
 ## Known Issues and Workarounds
 
-1. **Architecture Mismatch**: The `just setup-linux` command downloads ARM64 TailwindCSS binary which fails on x86_64. Always use the manual setup commands provided above for x86_64 systems.
+1. **External Link Checking**: Running `zola check` without `--skip-external-links` will fail due to network restrictions in most CI/build environments. Always use `zola check --skip-external-links`.
 
-2. **External Link Checking**: Running `zola check` without `--skip-external-links` will fail due to network restrictions in most CI/build environments. Always use `zola check --skip-external-links`.
+2. **Binary Dependencies**: The `src/tailwindcss` binary is excluded from git (in .gitignore) and must be downloaded after each fresh clone.
 
-3. **Binary Dependencies**: The `src/tailwindcss` binary is excluded from git (in .gitignore) and must be downloaded after each fresh clone.
-
-4. **macOS Setup**: Use `just setup-macos` for Apple Silicon Macs. For Intel Macs, use the manual x86_64 setup.
+3. **macOS Setup**: Use `just setup-macos` for Apple Silicon Macs. For Intel Macs, use the manual x86_64 setup (download the binary to `src/tailwindcss` and make it executable).
 
 ## Time Expectations
 
@@ -244,8 +242,8 @@ Key configuration sections:
 The project requires these exact versions:
 - **Zola**: v0.21.0 (static site generator)
 - **Just**: v1.42.4+ (task runner) 
-- **TailwindCSS**: Latest (downloaded binary, architecture-specific)
-- **DaisyUI**: Latest (JavaScript libraries)
+- **TailwindCSS**: v4.x (downloaded binary, architecture-specific)
+- **DaisyUI**: v5.x (JavaScript libraries)
 
 All dependencies are downloaded and managed locally in the `src/` directory.
 
