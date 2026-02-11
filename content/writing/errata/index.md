@@ -71,7 +71,7 @@ You can link to the start of the errata section from anywhere in the page using 
 See [Errata 1](@/devops/devops.md#errata).
 ```
 
-To support this, You should provide a fixed anchor at the beginning of the errata section.  
+To support this, you should provide a fixed anchor at the beginning of the errata section.  
 This anchor is placed at the **bottom of the page**, just before the *Errata & Updates* section, allowing links to scroll directly to it.
 
 ```html

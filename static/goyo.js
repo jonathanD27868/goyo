@@ -386,12 +386,12 @@ function isDarkMode() {
   return document.documentElement.getAttribute("data-theme") === config.darkTheme;
 }
 
-function applyErrataBadges() {
+function applyThemeAwareClasses(selector, lightAttr, darkAttr) {
   const dark = isDarkMode();
 
-  document.querySelectorAll("[data-errata-badge]").forEach((el) => {
-    const lightCls = el.getAttribute("data-badge-light") || "";
-    const darkCls = el.getAttribute("data-badge-dark") || "";
+  document.querySelectorAll(selector).forEach((el) => {
+    const lightCls = el.getAttribute(lightAttr) || "";
+    const darkCls = el.getAttribute(darkAttr) || "";
 
     // remove both variants
     for (const c of lightCls.split(/\s+/).filter(Boolean)) el.classList.remove(c);
@@ -400,26 +400,15 @@ function applyErrataBadges() {
     // add chosen variant
     const chosen = (dark ? darkCls : lightCls).split(/\s+/).filter(Boolean);
     for (const c of chosen) el.classList.add(c);
-
   });
 }
 
+function applyErrataBadges() {
+  applyThemeAwareClasses("[data-errata-badge]", "data-badge-light", "data-badge-dark");
+}
+
 function applyIssueAndForkAlert() {
-  const dark = isDarkMode();
-
-  document.querySelectorAll("[data-issue-and-typo-alert]").forEach((el) => {
-    const lightCls = el.getAttribute("data-issue-and-typo-alert-light") || "";
-    const darkCls = el.getAttribute("data-issue-and-typo-alert-dark") || "";
-
-    // remove both variants
-    for (const c of lightCls.split(/\s+/).filter(Boolean)) el.classList.remove(c);
-    for (const c of darkCls.split(/\s+/).filter(Boolean)) el.classList.remove(c);
-
-    // add chosen variant
-    const chosen = (dark ? darkCls : lightCls).split(/\s+/).filter(Boolean);
-    for (const c of chosen) el.classList.add(c);
-
-  });
+  applyThemeAwareClasses("[data-issue-and-typo-alert]", "data-issue-and-typo-alert-light", "data-issue-and-typo-alert-dark");
 }
 
 function initToc() {

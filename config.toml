@@ -9,7 +9,7 @@ generate_feeds = true
 #feed_filenames = ["rss.xml"]
 generate_sitemap = true
 
-# CUSTOM_PERSONAL: tags for internal search only, no feed
+# Tags for internal search only, no feed
 taxonomies = [
     { name = "tags", feed = false },
     { name = "categories", paginate_by = 10, feed = true },
@@ -25,7 +25,7 @@ theme = "github-dark"
 generate_feeds = true
 #feed_filenames = ["rss.xml"]
 build_search_index = true
-# CUSTOM_PERSONAL: tags for internal search only, no feed
+# Tags for internal search only, no feed
 taxonomies = [
     { name = "tags", feed = false },
     { name = "categories", paginate_by = 10, feed = true },
@@ -159,8 +159,8 @@ brightness = "normal"       # Common brightness for both themes: "darker", "norm
 # dark_brightness = "darker"  # Override brightness for dark theme only (optional)
 # light_brightness = "normal" # Override brightness for light theme only (optional)
 disable_toggle = false      # Hide theme toggle button
-default_theme_dark = "goyo-dark"
-default_theme_light = "goyo-light"
+default_theme_dark = "goyo-dark" # Default dark theme (e.g., "goyo-dark", "dracula", "abyss")
+default_theme_light = "goyo-light" # Default light theme (e.g., "goyo-light", "cupcake", "retro")
 
 # Font Configuration (new structured format)
 # You can use either the new [extra.font] format or the legacy flat format (custom_font_enabled, custom_font_name, custom_font_path)
@@ -182,8 +182,8 @@ enable_desktop_menu = true # integrate the navigation into the sidebar
 # You can use either the new [extra.share] format or the legacy flat format (enable_copy_url, enable_share_x)
 # The new format takes priority when both are present
 [extra.share]
-copy_url = true  # Copy URL button
-x = true         # Share on X button
+copy_url = false  # Copy URL button
+x = false         # Share on X button
 
 # Favicon Configuration (new structured format)
 # Default path is /icons/ for all favicon files

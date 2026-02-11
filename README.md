@@ -130,6 +130,8 @@ brightness = "normal"       # Common brightness: "darker", "normal", "lighter"
 # dark_brightness = "darker"  # Override brightness for dark theme (optional)
 # light_brightness = "normal" # Override brightness for light theme (optional)
 disable_toggle = false      # Hide theme toggle button
+default_theme_dark = "goyo-dark" # Default dark theme (e.g., "goyo-dark", "dracula", "abyss")
+default_theme_light = "goyo-light" # Default light theme (e.g., "goyo-light", "cupcake", "retro")
 
 # Legacy theme configuration (still supported for backward compatibility)
 # default_colorset = "dark"

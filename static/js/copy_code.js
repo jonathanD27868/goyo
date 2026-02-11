@@ -57,7 +57,7 @@ function copyToClipboard(text, button) {
     });
 }
 
-// CUSTOM_PERSONAL: script to display message when icon clicked
+// Display message when icon clicked
 function copyToClipboardRSSIcon(text, button) {
     if (!navigator.clipboard) {
         // Fallback for very old browsers or non-HTTPS

@@ -87,7 +87,7 @@ To activate the icon, at least one content page must populate the category. Base
 taxonomies = { tags = ["goyo"], categories = ["My Section"] }
 ```
 
-* Match by Custom Slug 
+* Match by Custom Slug
 ```toml
 # (Matches the 'slug' defined in the section's [extra])
 taxonomies = { tags = ["goyo"], categories = ["my-category-slug"] }

@@ -94,8 +94,15 @@
             var lightBrightness = "{{ light_brightness }}";
 
             // Read configured theme names from config.toml (with defaults)
-            var configuredDarkTheme = "{{ config.extra.theme.default_theme_dark | default(value='goyo-dark') }}";
-            var configuredLightTheme = "{{ config.extra.theme.default_theme_light | default(value='goyo-light') }}";
+            {% if config.extra.theme is defined %}
+                {% set configured_dark_theme = config.extra.theme.default_theme_dark | default(value='goyo-dark') %}
+                {% set configured_light_theme = config.extra.theme.default_theme_light | default(value='goyo-light') %}
+            {% else %}
+                {% set configured_dark_theme = 'goyo-dark' %}
+                {% set configured_light_theme = 'goyo-light' %}
+            {% endif %}
+            var configuredDarkTheme = "{{ configured_dark_theme }}";
+            var configuredLightTheme = "{{ configured_light_theme }}";
 
             // Expose to goyo.js
             window.themeConfig = {

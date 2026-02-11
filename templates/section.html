@@ -12,7 +12,7 @@
                 <span class="text-sm font-normal px-2 py-0.5 border border-gray-500/30 rounded">{{ section.extra.badge }}</span>
             {% endif %}
 
-            {# CUSTOM_PERSONAL: feed icon #}
+            {# Feed icon #}
             {# 1. Get all categories used in the site #}
             {% set categories = get_taxonomy(kind="categories", lang=lang) %}
             {% set feed_filename = config.feed_filenames | first | default(value="atom.xml") %}

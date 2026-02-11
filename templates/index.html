@@ -165,6 +165,19 @@
     </div>
 
     {% block js_body %}
+        <script>
+            {% if config.extra.theme is defined %}
+                {% set configured_dark_theme = config.extra.theme.default_theme_dark | default(value='goyo-dark') %}
+                {% set configured_light_theme = config.extra.theme.default_theme_light | default(value='goyo-light') %}
+            {% else %}
+                {% set configured_dark_theme = 'goyo-dark' %}
+                {% set configured_light_theme = 'goyo-light' %}
+            {% endif %}
+            window.GOYO_CONFIG = {
+                defaultThemeDark: "{{ configured_dark_theme }}",
+                defaultThemeLight: "{{ configured_light_theme }}",
+            };
+        </script>
         <script type="text/javascript" src="{{ get_url(path='goyo.js') | safe }}"></script>
         {% if config.build_search_index %}
         <!-- Lazy load search functionality -->

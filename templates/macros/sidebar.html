@@ -28,13 +28,12 @@
         </div>
     </div>
     {% endif %}
-    <!--  CUSTOM_PERSONAL: sidebar is to control the double hover effect in src/main.css  -->
+    <!--  Sidebar is to control the double hover effect in src/main.css  -->
     <ul class="menu sidebar w-full flex-grow">
         {% set index = get_section(path="_index.md") %}
         {# Level 1 - Root #}
         {% for page in index.pages %}
 
-            {# CUSTOM_PERSONAL: remove the pages that have in_sidebar = true in front-matter #}
             {# CHECK: If in_sidebar is false, skip this page #}
             {% if page.extra.in_sidebar is defined and page.extra.in_sidebar == false %}
                 {% continue %}
@@ -111,7 +110,7 @@
             </li>
         {% endfor %}
 
-        {# --- CUSTOM_PERSONAL: Custom Links Feeds --- #}
+        {# --- Custom Links Feeds --- #}
         {% if config.generate_feeds %}
         <li>
             <a class="hover:no-underline {% if normalized_current_path == '/feeds/' %}rounded bg-gray-500/15{% endif %}"

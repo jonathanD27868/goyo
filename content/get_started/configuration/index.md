@@ -119,6 +119,8 @@ brightness = "normal"       # Common brightness: "darker", "normal", "lighter"
 dark_brightness = "darker"  # Override brightness for dark theme (optional)
 light_brightness = "normal" # Override brightness for light theme (optional)
 disable_toggle = false      # Hides dark/light mode toggle
+default_theme_dark = "goyo-dark" # Default dark theme (e.g., "goyo-dark", "dracula", "abyss")
+default_theme_light = "goyo-light" # Default light theme (e.g., "goyo-light", "cupcake", "retro")
 ```
 
 **Per-theme brightness:** You can set `dark_brightness` and `light_brightness` to use different brightness levels for each theme. If not specified, the common `brightness` value will be used for both themes.
