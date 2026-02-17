@@ -4,7 +4,7 @@
 {% macro render_hero(section) %}
     {# Hero Section - Ashen Minimalist Style #}
     {% if section.extra.hero %}
-        <div class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
+        <div class="relative min-h-[calc(100vh-theme(spacing.16))] flex items-center justify-center text-center overflow-hidden">
             <!-- Subtle Animated Background -->
             <div class="absolute inset-0">
                 <div class="absolute inset-0 hero-background"></div>
