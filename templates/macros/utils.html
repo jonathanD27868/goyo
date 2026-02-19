@@ -1,0 +1,44 @@
+{% macro trans_or_default(key, default, lang, config, config_file=false) -%}
+    {%- set result = default -%}
+    {%- set found = false -%}
+
+    {%- if lang -%}
+        {%- set effective_lang = lang -%}
+    {%- elif config.default_language -%}
+        {%- set effective_lang = config.default_language -%}
+    {%- else -%}
+        {%- set effective_lang = "en" -%}
+    {%- endif -%}
+
+    {# Try config object first (fast, for non-default languages) #}
+    {%- if effective_lang != config.default_language -%}
+         {%- if config.languages and config.languages[effective_lang] and config.languages[effective_lang].translations and config.languages[effective_lang].translations[key] -%}
+             {%- set_global result = config.languages[effective_lang].translations[key] -%}
+             {%- set_global found = true -%}
+         {%- endif -%}
+    {%- endif -%}
+
+    {# If not found in specific language, try loading config files for default language translations #}
+    {# Use provided config_file if available to avoid redundant loads #}
+    {%- if not found -%}
+        {%- set loaded_config = config_file -%}
+        {%- if not loaded_config -%}
+            {%- set loaded_config = load_data(path="/config.toml", format="toml", required=false) -%}
+            {%- if not loaded_config -%}
+                {%- set loaded_config = load_data(path="/config.yaml", format="yaml", required=false) -%}
+            {%- endif -%}
+            {%- if not loaded_config -%}
+                {%- set loaded_config = load_data(path="/config.yml", format="yaml", required=false) -%}
+            {%- endif -%}
+        {%- endif -%}
+
+        {%- if loaded_config -%}
+             {# Check default language translations in loaded data #}
+             {%- if loaded_config.translations and loaded_config.translations[key] -%}
+                 {%- set_global result = loaded_config.translations[key] -%}
+             {%- endif -%}
+        {%- endif -%}
+    {%- endif -%}
+
+    {{ result }}
+{%- endmacro %}

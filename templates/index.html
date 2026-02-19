@@ -6,15 +6,23 @@
 {% import "macros/footer.html" as macros_footer %}
 {% import "macros/sidebar.html" as macros_sidebar %}
 
+{% set config_file = load_data(path="/config.toml", format="toml", required=false) %}
+{% if not config_file %}
+    {% set config_file = load_data(path="/config.yaml", format="yaml", required=false) %}
+{% endif %}
+{% if not config_file %}
+    {% set config_file = load_data(path="/config.yml", format="yaml", required=false) %}
+{% endif %}
+
 <!DOCTYPE html>
 {{ macros_head::html_tag(config=config, lang=lang) }}
 <head>
     {% if page is defined %}
-        {{ macros_head::head(config=config, page=page, section=false, current_url=config.base_url) }}
+        {{ macros_head::head(config=config, page=page, section=false, current_url=config.base_url, config_file=config_file) }}
     {% elif section is defined %}
-        {{ macros_head::head(config=config, page=false, section=section, current_url=config.base_url) }}
+        {{ macros_head::head(config=config, page=false, section=section, current_url=config.base_url, config_file=config_file) }}
     {% else %}
-        {{ macros_head::head(config=config, page=false, section=false, current_url=config.base_url) }}
+        {{ macros_head::head(config=config, page=false, section=false, current_url=config.base_url, config_file=config_file) }}
     {% endif %}
     {% block extra_head %}{% endblock extra_head %}
 </head>
@@ -74,10 +82,10 @@
                     </main>
 
                     {% if page is defined %}
-                        {{ macros_toc::toc(page=page) }}
+                        {{ macros_toc::toc(page=page, lang=lang, config=config, config_file=config_file) }}
                     {% endif %}
                     {% if section is defined %}
-                        {{ macros_toc::toc(page=section) }}
+                        {{ macros_toc::toc(page=section, lang=lang, config=config, config_file=config_file) }}
                     {% endif %}
                 </div>
             </div>
@@ -157,9 +165,9 @@
         {% endif %}
         <div id="sidebar" class="{{ sidebar_classes }}">
             {% if section is defined %}
-                {{ macros_sidebar::sidebar(config=config, lang=lang, current_path=current_path, section=section) }}
+                {{ macros_sidebar::sidebar(config=config, lang=lang, current_path=current_path, section=section, config_file=config_file) }}
             {% else %}
-                {{ macros_sidebar::sidebar(config=config, lang=lang, current_path=current_path, section=false) }}
+                {{ macros_sidebar::sidebar(config=config, lang=lang, current_path=current_path, section=false, config_file=config_file) }}
             {% endif %}
         </div>
     </div>

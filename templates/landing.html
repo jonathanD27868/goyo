@@ -42,7 +42,7 @@
                 {% if section.extra.hero.cta_buttons %}
                     <div class="flex justify-center gap-6 flex-wrap">
                         {% for button in section.extra.hero.cta_buttons %}
-                            <a href="{{ button.url | safe }}"
+                            <a href="{% if button.url is matching('^https?://') %}{{ button.url | safe }}{% else %}{{ get_url(path=button.url) | safe }}{% endif %}"
                                class="group relative px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105
                                       {% if button.style == 'primary' %}
                                         hero-cta-primary

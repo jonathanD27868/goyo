@@ -1,3 +1,4 @@
+{% import "macros/utils.html" as utils %}
 {% macro get_theme_color(config) %}
 {# Theme configuration with backward compatibility #}
 {# Priority: theme.dark_brightness/light_brightness (new per-theme) > theme.brightness (common) > brightness (legacy) #}
@@ -54,7 +55,7 @@
 <html lang="{{ lang | default(value='en') }}"{% if is_rtl %} dir="rtl"{% endif %} data-theme="{{ default_theme }}" style="background-color: {{ theme_color }};">
 {% endmacro html_tag %}
 
-{% macro head(config, page, section, current_url) %}
+{% macro head(config, page, section, current_url, config_file=false) %}
     {# current_url이 정의되어 있지 않으면 기본값으로 설정 #}
     {% if current_url is not defined or current_url == "" %}
         {% set current_url = config.base_url %}
@@ -169,7 +170,7 @@
             {# Default Pretendard font with font-display swap for better performance #}
             @font-face {
                 font-family: "Pretendard-Regular";
-                src: url('{{ get_url(path="fonts/Pretendard-Regular.woff") | safe }}') format("woff");
+                src: url('{{ get_url(path="css/fonts/Pretendard-Regular.woff") | safe }}') format("woff");
                 font-weight: 400;
                 font-style: normal;
                 font-display: swap;
@@ -310,7 +311,7 @@
     <link rel="stylesheet" href="{{ get_url(path="css/font-awesome.min.css") | safe }}">
 
     <!-- Preload critical fonts -->
-    <link rel="preload" href="{{ get_url(path="fonts/Pretendard-Regular.woff") | safe }}" as="font" type="font/woff" crossorigin>
+    <link rel="preload" href="{{ get_url(path="css/fonts/Pretendard-Regular.woff") | safe }}" as="font" type="font/woff" crossorigin>
 
     <!--  Global Config to pass to different JS scripts  -->
     <script>
@@ -318,9 +319,9 @@
             defaultThemeDark: "{{ config.extra.theme.default_theme_dark | default(value="goyo-dark") }}",
             defaultThemeLight: "{{ config.extra.theme.default_theme_light | default(value="goyo-light") }}",
             i18n: {
-                copy: {{ trans(key="copy", lang=lang) | json_encode | safe }},
-                copied: {{ trans(key="copied", lang=lang) | json_encode | safe }},
-                failed_to_copy: {{ trans(key="failed_to_copy", lang=lang) | json_encode | safe }},
+                copy: {{ utils::trans_or_default(key="copy", default="Copy", lang=lang, config=config, config_file=config_file) | json_encode | safe }},
+                copied: {{ utils::trans_or_default(key="copied", default="Copied!", lang=lang, config=config, config_file=config_file) | json_encode | safe }},
+                failed_to_copy: {{ utils::trans_or_default(key="failed_to_copy", default="Failed to copy!", lang=lang, config=config, config_file=config_file) | json_encode | safe }},
             },
         };
     </script>

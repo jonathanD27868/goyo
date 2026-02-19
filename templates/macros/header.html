@@ -32,7 +32,7 @@
     </div>
     <!-- Logo -->
     <div class="flex-1">
-        <a href="/" class="btn btn-ghost hover:animate-pulse hover:bg-transparent hover:border-transparent normal-case text-xl" style="background: linear-gradient(135deg, #9ca3af, #6b7280); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: bold; font-size: 1.5rem;">
+        <a href="{{ get_url(path="/", lang=lang) }}" class="btn btn-ghost hover:animate-pulse hover:bg-transparent hover:border-transparent normal-case text-xl" style="background: linear-gradient(135deg, #9ca3af, #6b7280); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: bold; font-size: 1.5rem;">
             {% if has_theme_specific_logos %}
                 {# Theme-specific logos with dynamic switching #}
                 {# Resolve the actual paths - use theme-specific if set, otherwise fallback to default #}
