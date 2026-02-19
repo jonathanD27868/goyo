@@ -191,7 +191,7 @@ disable_root_sidebar_hide = false
 ```toml
 [extra]
 nav = [
-    { name = "Documents", url = "/introduction", type = "url", icon = "fa-solid fa-book" },
+    { name = "Documents", url = "/introduction", type = "url", icon = "book" },
     { name = "GitHub", url = "https://github.com/hahwul/goyo", type = "url" },
     { name = "Links", type = "dropdown", members = [
         { name = "Blog", url = "https://www.hahwul.com", type = "url" },
@@ -203,6 +203,8 @@ nav_ko = [
     { name = "문서", url = "/ko/introduction", type = "url" },
 ]
 ```
+
+- **`icon`**: Name of the SVG icon file in `static/icons/` folder without the `.svg` extension (e.g., `book`)
 
 ### Language Aliases
 

@@ -15,6 +15,7 @@ title = "Goyo에 오신 것을 환영합니다!"
 badge = "Clean Theme, Tranquil Feel"
 description = "한국어 '고요'에서 영감을 받은 Goyo는 단순함과 깔끔한 문서를 지향하는 Zola 테마입니다. Goyo를 사용하면 아름답고 실용적인 문서 페이지를 쉽게 만들 수 있습니다."
 image = "/images/landing.jpg"
+image_mobile = "/images/landing-mobile.webp"
 gradient_opacity = 30
 image_opacity = 25
 cta_buttons = [
@@ -29,32 +30,32 @@ description = "깔끔하고 미니멀하며 콘텐츠에 집중"
 [[extra.features_section.features]]
 title = "문서 친화적"
 desc = "깔끔한 문서 작성 경험을 제공합니다."
-icon = "fa-solid fa-book"
+icon = "book"
 
 [[extra.features_section.features]]
 title = "심플한 디자인"
 desc = "미니멀리즘을 추구하는 테마입니다."
-icon = "fa-solid fa-minimize"
+icon = "minimize"
 
 [[extra.features_section.features]]
 title = "커스터마이징과 우아한 랜딩 페이지"
 desc = "높은 커스터마이징성과 아름다운 랜딩 페이지를 제공합니다."
-icon = "fa-solid fa-palette"
+icon = "palette"
 
 [[extra.features_section.features]]
 title = "SEO 최적화"
 desc = "검색 엔진에 최적화된 구조를 제공합니다."
-icon = "fa-solid fa-magnifying-glass-chart"
+icon = "magnifying-glass-chart"
 
 [[extra.features_section.features]]
 title = "다양한 숏코드"
 desc = "다양하고 유용한 숏코드를 제공합니다."
-icon = "fa-solid fa-code"
+icon = "code"
 
 [[extra.features_section.features]]
 title = "다크 & 라이트 모드"
 desc = "다크 모드와 라이트 모드를 모두 지원합니다."
-icon = "fa-solid fa-circle-half-stroke"
+icon = "circle-half-stroke"
 
 [extra.trust_section]
 title = "기술 스택"

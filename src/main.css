@@ -317,6 +317,25 @@
     }
 }
 
+/* Icons SVGs*/
+@layer components {
+    .icon {
+        @apply inline-flex items-center;
+        /* default icon color (inherits theme) */
+        @apply text-base-content/80;
+    }
+
+    .icon svg {
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        vertical-align: -0.125em;
+
+        fill: currentColor;
+        stroke: currentColor;
+    }
+}
+
 /* UI COMPONENTS (Generic Utility Classes) */
 
 /* Toc links */
@@ -1000,7 +1019,8 @@ footer.footer .social-icon:hover {
     @apply font-medium text-sm text-base-content/60 no-underline transition-colors duration-200;
 }
 
-.install-link:hover {
+.install-link:hover,
+.install-tab-link:hover .icon{
     @apply text-base-content;
 }
 

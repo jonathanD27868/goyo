@@ -307,8 +307,9 @@
 
       <!-- CSS -->
     <link rel="stylesheet" href="{{ get_url(path="css/main.css") | safe }}">
+    {% if config.extra.enable_custom_css %}
     <link rel="stylesheet" href="{{ get_url(path="css/custom-main.css") | safe }}">
-    <link rel="stylesheet" href="{{ get_url(path="css/font-awesome.min.css") | safe }}">
+    {% endif %}
 
     <!-- Preload critical fonts -->
     <link rel="preload" href="{{ get_url(path="css/fonts/Pretendard-Regular.woff") | safe }}" as="font" type="font/woff" crossorigin>

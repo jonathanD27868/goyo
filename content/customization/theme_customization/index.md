@@ -17,7 +17,14 @@ This guide explains both approaches.
 
 ## 1. Overriding the theme styles (quick & simple)
 
-If you only want to tweak colors, spacing, or components **without defining a new theme**, create the following file in your site:
+If you only want to tweak colors, spacing, or components **without defining a new theme**, enable the custom css feature:
+
+```toml
+# config.toml
+
+enable_custom_css = true
+```
+Then create the following file in your site:
 
 ```
 static/css/custom-main.css

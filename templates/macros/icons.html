@@ -1,0 +1,6 @@
+{% macro icon(name, class="") %}
+{% set file = "static/icons/" ~ name ~ ".svg" %}
+<span class="icon {{ class }}" aria-hidden="true">
+    {{ load_data(path=file) | safe }}
+  </span>
+{% endmacro %}

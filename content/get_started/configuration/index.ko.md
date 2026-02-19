@@ -188,7 +188,7 @@ disable_root_sidebar_hide = false
 ```toml
 [extra]
 nav = [
-    { name = "Documents", url = "/introduction", type = "url", icon = "fa-solid fa-book" },
+    { name = "Documents", url = "/introduction", type = "url", icon = "book" },
     { name = "GitHub", url = "https://github.com/hahwul/goyo", type = "url" },
     { name = "Links", type = "dropdown", members = [
         { name = "Blog", url = "https://www.hahwul.com", type = "url" },
@@ -200,6 +200,8 @@ nav_ko = [
     { name = "문서", url = "/ko/introduction", type = "url" },
 ]
 ```
+
+- **`icon`**: static/icons/ 폴더 내 SVG 아이콘 파일의 이름이며, .svg 확장자는 제외합니다 (예: book)
 
 ### 언어 별칭
 

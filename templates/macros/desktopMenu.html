@@ -1,3 +1,5 @@
+{% import "macros/icons.html" as icons %}
+
 {% macro menu(config, lang) %}
 <ul class="menu w-full justify-end lg:menu-horizontal px-1">
     {% set current_nav = config.extra.nav %}
@@ -12,7 +14,7 @@
     {% if item.type == "dropdown" %}
     <li class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost justify-end w-full">
-            {% if item.icon %}<i class="{{ item.icon }}"></i>{% endif %}
+            {% if item.icon %}{{ icons::icon(name=item.icon) }}{% endif %}
             {{ item.name }}
             <svg class="inline w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
@@ -20,7 +22,7 @@
             {% for member in item.members %}
             <li>
                 <a class="btn btn-ghost hover:no-underline" href="{% if member.url is matching('^https?://') %}{{ member.url | safe }}{% else %}{{ get_url(path=member.url) | safe }}{% endif %}">
-                    {% if member.icon %}<i class="{{ member.icon }}"></i>{% endif %}
+                    {% if member.icon %}{{ icons::icon(name=member.icon) }}{% endif %}
                     {{ member.name }}
                 </a>
             </li>
@@ -30,7 +32,7 @@
     {% else %}
     <li>
         <a class="btn btn-ghost hover:no-underline justify-end w-full" href="{% if item.url is matching('^https?://') %}{{ item.url | safe }}{% else %}{{ get_url(path=item.url) | safe }}{% endif %}">
-          {% if item.icon %}<i class="{{ item.icon }}"></i>{% endif %}
+          {% if item.icon %}{{ icons::icon(name=item.icon) }}{% endif %}
           {{ item.name }}
         </a>
     </li>

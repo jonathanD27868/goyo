@@ -19,17 +19,17 @@ description = "Clean, minimal, and focused on content"
 [[extra.features_section.features]]
 title = "Documentation Friendly"
 desc = "Provides a clean writing experience for documentation."
-icon = "fa-solid fa-book"
+icon = "book"
 
 [[extra.features_section.features]]
 title = "Simple Design"
 desc = "A theme that pursues minimalism."
-icon = "fa-solid fa-minimize"
+icon = "minimize"
 
 [[extra.features_section.features]]
 title = "Fast Performance"
 desc = "Built with performance in mind."
-icon = "fa-solid fa-bolt"
+icon = "bolt"
 ```
 
 ## Properties
@@ -41,8 +41,9 @@ icon = "fa-solid fa-bolt"
 ### Feature Properties
 - **`title`** (required): Feature name
 - **`desc`** (required): Feature description
-- **`icon`** (optional): Font Awesome icon class (e.g., `fa-solid fa-book`)
+- **`icon`** (optional): Name of the SVG icon file in `static/icons/` folder without the `.svg` extension (e.g., `book`)
 
 ## Icon Usage
 
-Use Font Awesome icons by specifying the full class name. Browse available icons at [fontawesome.com](https://fontawesome.com/icons).
+You can add icons under `static/icons/` folder or add `font-awesome.min.css` under `static/css/` (resource: [Font Awesome](https://github.com/FortAwesome/Font-Awesome/releases).)  
+Browse available Font Awesome icons at [fontawesome.com](https://fontawesome.com/icons).

@@ -14,7 +14,8 @@ section_order = ["hero", "features", "trust", "easy_command", "showcase", "socia
 title = "Welcome to Goyo!"
 badge = "Clean Theme, Tranquil Feel"
 description = "Inspired by the Korean word \"Goyo\" (고요), meaning calm or serene, Goyo is a Zola theme that aims for simplicity and clean documentation. With Goyo, you can easily create beautiful and practical documentation pages."
-image = "/images/landing.jpg"
+image = "/images/landing.webp"
+image_mobile = "/images/landing-mobile.webp"
 gradient_opacity = 30
 image_opacity = 25
 cta_buttons = [
@@ -29,32 +30,32 @@ description = "Clean, minimal, and focused on content"
 [[extra.features_section.features]]
 title = "Documentation Friendly"
 desc = "Provides a clean writing experience for documentation."
-icon = "fa-solid fa-book"
+icon = "book"
 
 [[extra.features_section.features]]
 title = "Simple Design"
 desc = "A theme that pursues minimalism."
-icon = "fa-solid fa-minimize"
+icon = "minimize"
 
 [[extra.features_section.features]]
 title = "Customization and Elegant Landing Page"
 desc = "Highly customizable with a beautiful landing page."
-icon = "fa-solid fa-palette"
+icon = "palette"
 
 [[extra.features_section.features]]
 title = "SEO Optimized"
 desc = "Provides a structure optimized for search engines."
-icon = "fa-solid fa-magnifying-glass-chart"
+icon = "magnifying-glass-chart"
 
 [[extra.features_section.features]]
 title = "Various Shortcodes"
 desc = "Offers a variety of useful shortcodes."
-icon = "fa-solid fa-code"
+icon = "code"
 
 [[extra.features_section.features]]
 title = "Dark & Light Mode"
 desc = "Supports both dark and light modes."
-icon = "fa-solid fa-circle-half-stroke"
+icon = "circle-half-stroke"
 
 [extra.trust_section]
 title = "Tech Stack"
